@@ -1,0 +1,70 @@
+<div fxLayout="row" fxLayoutGap="18px" fxLayoutAlign="center start">
+  <nb-card size="medium" class="skillsetChart">
+    <nb-card-header class="background">
+      <p class="sourceSemiBold fontSize22px" >Skillsets Chart</p>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="chart">
+        <canvas baseChart
+          [data]="doughnutChartData"
+          [labels]="doughnutChartLabels"
+          [colors]="doughnutChartColors"
+          [options] = "chartOptions"
+          [chartType]="doughnutChartType">
+        </canvas>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card size="medium" class="skillsetList">
+    <nb-card-header class="background">
+      <p class="sourceSemiBold fontSize22px" >Skillsets</p>
+    </nb-card-header>
+    <nb-list>
+      <nb-list-item *ngFor="let skill of freelanceSkillList" fxLayout="row" fxLayoutGap="18px" fxLayoutAlign="start start">
+        <p class="sourceSemiBold fontSize18px">{{ skill.skill }}</p>
+        <p class="sourceLight fontSize18px">{{ skill.count }}</p>
+      </nb-list-item>
+    </nb-list>
+  </nb-card>
+
+</div>
+
+<div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start start">
+
+  <nb-card  class="recentadded">
+    <nb-card-header class="background">
+      <p class="sourceSemiBold fontSize22px" >Recently Added</p>
+    </nb-card-header>
+    <nb-list>
+      <nb-list-item *ngFor="let freelance of freelanceLatestList" fxLayout="row" fxLayoutGap="18px" fxLayoutAlign="start start">
+        <p class="sourceSemiBold fontSize18px" >{{ freelance.fullname }}</p>
+        <p class="sourceLight fontSize18px" >{{ freelance.email }}</p>
+        <p class="sourceLight fontSize18px" >RM{{ freelance.price1 }} - RM{{ freelance.price2 }}</p>
+        <p class="sourceLight fontSize18px" >{{ freelance.createdat }}</p>
+      </nb-list-item>
+    </nb-list>
+  </nb-card>
+
+  <div fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="start stretch">
+    <nb-card class="activeUser">
+      <nb-card-header class="background">
+        <p class="sourceSemiBold fontSize22px" >Active User</p>
+      </nb-card-header>
+      <nb-card-body>
+        <p class="sourceLight fontSize18px">{{hiredFreelance}} / {{totalFreelance}}</p>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card class="unactiveUser">
+      <nb-card-header class="background">
+        <p class="sourceSemiBold fontSize22px" >Unactive User</p>
+      </nb-card-header>
+      <nb-card-body>
+        <p class="sourceLight fontSize18px">{{unhiredFreelance}} / {{totalFreelance}}</p>
+      </nb-card-body>
+    </nb-card>
+
+  </div>
+
+</div>

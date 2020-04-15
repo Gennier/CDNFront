@@ -1,0 +1,29 @@
+<div class="center">
+  <div >
+    <div style="text-align: center;">
+      <img src="assets/img/People-search-bro.png" class="image">
+    </div>
+    <div class="groupHeader">
+      <p class="sourceSemiBold fontSize28px">Complete Developer Network</p>
+      <p class="sourcelight fontSize20px ">Sign In</p>
+    </div>
+
+    <div class="paddingTop20px" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px">
+
+      <div style="width: 100%">
+        <p class="sourceLight fontSize16px">Email Address</p>
+        <input class="sourceRegular input" type="text" [(ngModel)]="email">
+      </div>
+
+      <div style="width: 100%">
+        <p class="sourceLight fontSize16px">Password</p>
+        <input class="sourceRegular input" type="password" [(ngModel)]="password">
+      </div>
+
+      <p class="error" *ngIf="error">Wrong Email or Password</p>
+
+      <button class="button sourceLight" (click)="login()">Login</button>
+
+    </div>
+  </div>
+</div>

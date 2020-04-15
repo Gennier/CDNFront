@@ -1,0 +1,142 @@
+<nb-card >
+  <nb-card-header class="background">
+    <p class="sourceSemiBold fontSize22px" >User</p>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="addPostcode" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+        <div>
+          <p class="sourceLight">Full Name</p>
+          <input class="sourceRegular" type="text" [(ngModel)]="fullname" nbInput>
+        </div>
+
+        <div>
+          <p class="sourceLight">Email</p>
+          <input class="sourceRegular" type="text" [(ngModel)]="email" nbInput>
+        </div>
+
+        <div>
+          <p class="sourceLight">Phone</p>
+          <input class="sourceRegular" type="text" [(ngModel)]="phone" nbInput>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+        <div>
+          <p class="sourceLight">Price Range</p>
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+            <div>
+              <input class="sourceRegular" type="text" [(ngModel)]="price1" nbInput>
+            </div>
+            <p> - </p>
+            <div>
+              <input class="sourceRegular" type="text" [(ngModel)]="price2" nbInput>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="sourceLight">Hobby</p>
+          <textarea class="sourceRegular" type="text" [(ngModel)]="hobby" nbInput></textarea>
+        </div>
+      </div>
+
+
+
+      <div>
+        <p class="sourceLight">Skillsets</p>
+        <!-- <textarea class="sourceRegular" type="text" [(ngModel)]="skillsets" nbInput></textarea> -->
+        <mat-chip-list #chipList>
+          <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+            <div class="chipGroup">
+              <mat-chip *ngFor="let skill of skillsets" [selectable]="selectable" [removable]="removable" (removed)="removeChip(skill)">
+                {{skill}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+            </div>
+            <input class="sourceRegular" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addChip($event)" nbInput>
+          </div>
+        </mat-chip-list>
+      </div>
+
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button mat-button *ngIf="edit" (click)="updateUser()" class="sourceRegular button" >Edit</button>
+    <button mat-button *ngIf="edit" (click)="cancel()" class="sourceRegular button" >Cancel</button>
+    <button mat-button *ngIf="!edit" (click)="addUser()" class="sourceRegular button" >Add</button>
+  </nb-card-footer>
+</nb-card>
+
+<nb-card>
+  <nb-card-header class="background">
+    <p class="sourceSemiBold fontSize22px">Search Anything</p>
+    <mat-form-field appearance="outline" floatLabel="never">
+      <input matInput (keyup)="applyFilter($event)">
+    </mat-form-field>
+  </nb-card-header>
+  <nb-card-body>
+
+
+    <div >
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows >
+        <ng-container matColumnDef="fullname">
+          <th mat-header-cell *matHeaderCellDef class="sourceSemiBold fontSize16px"> Full Name </th>
+          <td mat-cell *matCellDef="let element" class="sourceRegular"> {{element.fullname}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="sourceSemiBold fontSize16px"> Email </th>
+          <td mat-cell *matCellDef="let element" class="sourceRegular"> {{element.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef class="sourceSemiBold fontSize16px"> Phone </th>
+          <td mat-cell *matCellDef="let element" class="sourceRegular"> {{element.phone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef class="sourceSemiBold fontSize16px"> Price </th>
+          <td mat-cell *matCellDef="let element" class="sourceRegular"> RM{{element.price1}} - RM{{element.price2}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="sourceSemiBold fontSize16px"> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <div>
+              <button mat-icon-button (click)="editUser(element)" ><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button (click)="deleteUser(element.id)" ><mat-icon>delete</mat-icon></button>
+              <button class="button" mat-button *ngIf="!element.hire" (click)="hireUser(element.id)">Hire</button>
+              <button class="button" mat-button *ngIf="element.hire" (click)="hireUser(element.id)">Unhire</button>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+            <div class="element-detail"
+                 [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <div>
+                <p class="sourceSemiBold fontSize16px" > Skillsets</p>
+                <div  fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+                  <p class="sourceLight fontSize16px" *ngFor="let skill of element.skillsets">{{skill}}</p>
+                </div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+            class="element-row"
+            [class.expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+      </table>
+    </div>
+  </nb-card-body>
+</nb-card>
+

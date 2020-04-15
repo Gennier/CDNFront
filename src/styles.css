@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+@font-face {
+  font-family: source-bold;
+  src: url(assets/fonts/SourceSansPro-Bold.woff) format("woff");
+}
+
+@font-face {
+  font-family: source-semibold;
+  src: url(assets/fonts/SourceSansPro-SemiBold.woff) format("woff");
+}
+
+@font-face {
+  font-family: source-regular;
+  src: url(assets/fonts/SourceSansPro-Regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: source-light;
+  src: url(assets/fonts/SourceSansPro-Light.woff) format("woff");
+}
+
+@font-face {
+  font-family: source-extralight;
+  src: url(assets/fonts/SourceSansPro-ExtraLight.woff) format("woff");
+}

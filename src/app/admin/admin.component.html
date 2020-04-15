@@ -1,0 +1,15 @@
+<nb-layout>
+
+  <nb-layout-header fixed>
+    <app-header style="width: 100%" (compactMenu)="toggleCompact($event)"></app-header>
+  </nb-layout-header>
+
+  <nb-sidebar tag="compact">
+    <app-sidemenu></app-sidemenu>
+  </nb-sidebar>
+
+  <nb-layout-column style="background-color: #fbf9fa;">
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+
+</nb-layout>

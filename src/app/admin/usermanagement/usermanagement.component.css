@@ -1,0 +1,123 @@
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.element-description {
+  padding: 16px;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}
+
+.sourceExtraLight {
+  font-family: 'source-extralight', sans-serif;
+}
+
+.sourceLight {
+  font-family: 'source-light', sans-serif;
+}
+
+.sourceRegular {
+  font-family: 'source-regular', sans-serif;
+}
+
+.sourceSemiBold {
+  font-family: 'source-semibold', sans-serif;
+}
+
+.sourceBold {
+  font-family: 'source-bold', sans-serif;
+}
+
+.fontSize14px {
+  font-size: 14px;
+}
+
+.fontSize16px {
+  font-size: 16px;
+}
+
+.fontSize18px {
+  font-size: 18px;
+}
+
+.fontSize20px {
+  font-size: 20px;
+}
+
+.fontSize22px {
+  font-size: 22px;
+}
+
+.fontSize24px {
+  font-size: 24px;
+}
+
+.chipGroup {
+  max-width: 300px;
+}
+
+.background {
+  background-color:  #fbfbff;
+}
+
+::ng-deep input.mat-chip-input {
+  width: 150px !important;
+  margin: 4px !important;
+  flex: none !important;
+}
+
+::ng-deep .mat-form-field-outline {
+  height: 40px !important;
+}
+
+::ng-deep .mat-form-field-flex {
+  height: 40px !important;
+}
+
+::ng-deep .mat-form-field-infix {
+  padding: 0px !important;
+  padding-top: 5px !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+
