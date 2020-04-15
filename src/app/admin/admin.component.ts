@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
 import { MainServices } from '../main.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, OnDestroy {
 
   private menuListenerSubs: Subscription;
 
@@ -36,6 +36,10 @@ export class AdminComponent implements OnInit {
 
   toggleCompact($event) {
     this.sidebarService.toggle($event, 'compact');
+  }
+
+  ngOnDestroy() {
+    this.authListenerSubs.unsubscribe();
   }
 
 }

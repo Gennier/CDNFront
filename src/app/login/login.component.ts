@@ -10,6 +10,8 @@ import { take } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
+  userIsAuthenticated = false;
+
   email: string;
   password: string;
 
@@ -21,6 +23,11 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.userIsAuthenticated = this.mainService.getIsAuth();
+    if (this.userIsAuthenticated) {
+      this.router.navigate(['/admin/overview']);
+    }
+
     this.email = null;
     this.password = null;
     this.error = false;
